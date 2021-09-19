@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use http\Env\Response;
+use Facade\FlareClient\Http\Exceptions\NotFound;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
@@ -36,6 +37,10 @@ class ProductController extends Controller
         $product = Product::where('product_code', $product_code)
             ->where('locale', $locale)
             ->first();
+
+        if (!$product) {
+            throw new NotFoundHttpException();
+        }
 
         return new JsonResponse($product);
     }

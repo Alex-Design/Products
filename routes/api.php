@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/product/{id}', [ProductController::class, 'getProductById']);
 Route::get('/product/{code}/{locale}', [ProductController::class, 'getProductByCodeAndLocale']);
 
-// Update
+// Create
 Route::post('/product', [ProductController::class, 'createProduct']);
 
 // Update
